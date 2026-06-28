@@ -113,8 +113,9 @@ Read-only -- nothing is changed.
    claude-harness ref-audit --json     # machine-readable
    ```
 2. Read the report. **Unresolved wikilinks are informational** -- in Obsidian a `[[link]]` to a
-   not-yet-created note is a legitimate forward-reference. Broken `.canvas`/`.base` refs (a board or base
-   pointing at a deleted file) are always real defects, as is orphan media (an attachment nothing links).
+   not-yet-created note is a legitimate forward-reference. Only broken `.canvas`/`.base` refs (a board or
+   base pointing at a deleted file) fail `--check`; orphans, dead-ends, and orphan media are surfaced for
+   review but not gated.
 3. Gate it in CI or a pre-commit hook:
    ```bash
    claude-harness ref-audit --check            # exit 1 only on broken canvas/base refs
