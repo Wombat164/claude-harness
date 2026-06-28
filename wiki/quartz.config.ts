@@ -34,6 +34,7 @@ const config: QuartzConfig = {
     // Required for sitemap + RSS absolute URLs and for correct cross-page links once deployed.
     baseUrl: "wombat164.github.io/claude-harness",
     ignorePatterns: ["private", "templates", ".obsidian"],
+    defaultDateType: "modified",   // Quartz v4 requires this (created | modified | published)
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
