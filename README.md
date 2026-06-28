@@ -138,7 +138,7 @@ neurokeeper builds on a healthy ecosystem; if it doesn't fit, one of these might
 - **[obsidian-mcp-server](https://github.com/cyanheads/obsidian-mcp-server)** — MCP tools for Obsidian (tag / frontmatter primitives).
 - **Native Obsidian plugins** — [Tag Wrangler](https://github.com/pjeby/tag-wrangler), [Linter](https://github.com/platers/obsidian-linter), Smart Rename — the GUI "apply" layer this project deliberately defers to (the engines **detect + propose**; these **apply**).
 
-What's different here: the deterministic vault-hygiene **engine suite** (tag / frontmatter / taxonomy / link-aware rename) + memory-audit behind a **portable core** — one codebase running as a Claude Code plugin *and* a standalone CLI/CI tool — rather than any single one of the above.
+What's different here: the deterministic vault-hygiene **engine suite** (tag / frontmatter / taxonomy / link-aware rename) + memory-audit behind a **portable core** — one codebase running as a Claude Code plugin *and* a standalone CLI/CI tool — rather than any single one of the above. A source-verified survey of the field (and exactly where neurokeeper is differentiated) is in [`docs/competitive-landscape.md`](docs/competitive-landscape.md).
 
 ## Security & license
 - **License:** MIT — see [`LICENSE`](LICENSE).
