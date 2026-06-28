@@ -5,7 +5,7 @@ harness-agnostic **engines** (deterministic scripts) + **prompt templates** + **
 a thin **adapter** binds them to a specific runtime. The Claude Code plugin is *one* adapter — the same
 core works from an MCP server, a plain CLI, or any other LLM harness.
 
-> Status: **0.1.3 (alpha).** Licensed **MIT** (see [`LICENSE`](LICENSE)).
+> Status: **0.1.4 (alpha).** Licensed **MIT** (see [`LICENSE`](LICENSE)).
 
 ## Why
 "Skills" (and plugins, hooks) are runtime-specific and not portable. Putting the real logic in **engines
@@ -67,6 +67,7 @@ vault). All read `VAULT_ROOT` + config from the environment (see `config.example
 default, mutating only with `--apply` behind the Obsidian-running guard; git is the audit.
 
 - `vault-taxonomy-inventory.py` -- naming/tags/frontmatter inventory (read-only)
+- `vault-ref-audit.py` -- reference-integrity audit: broken links / orphans / dead-ends / broken `.canvas`+`.base` refs / orphan media (read-only; `--check`/`--strict`)
 - `vault-frontmatter-lint.py` -- validate notes against the schema (off-vocab / missing-axes / unknown-fields); `--check`
 - `vault-frontmatter-fix.py` -- apply the schema reconciliation maps (status/maturity/horizon; surgical line-edits)
 - `vault-set-note-type.py` -- additive `note_type` from a folder-derive map

@@ -29,6 +29,17 @@ tags:
 - **Contract:** `--json`.
 - **Env:** `VAULT_ROOT`, `VAULT_SCAN_EXCLUDE`.
 
+### `ref-audit`
+- **compute x effect:** deterministic x read-only
+- **What it does:** audits reference integrity across the vault -- unresolved links, orphans (no inbound),
+  dead-ends (no outbound), broken `.canvas` and `.base` file references, and orphan media (attachments
+  referenced by nothing). The read-only counterpart to `name-reconcile`. Unresolved wikilinks are
+  **informational by default** (they are often intentional forward-links to not-yet-created notes);
+  broken `.canvas`/`.base` refs are always real defects.
+- **Contract:** `--json`, `--check` (exit 1 on broken canvas/base refs), `--strict` (also fail on
+  unresolved links).
+- **Env:** `VAULT_ROOT`, `VAULT_REFAUDIT_EXCLUDE`.
+
 ### `frontmatter-lint`
 - **compute x effect:** deterministic x read-only
 - **What it does:** validates notes against your schema-as-code -- flags off-vocabulary values, missing
@@ -149,6 +160,7 @@ ships with the repo; the harness ships schemas and examples only, never real con
 |---|---|---|
 | `VAULT_ROOT` | the vault engines | Path to your notes vault (defaults to the current directory). |
 | `VAULT_SCAN_EXCLUDE` | the vault engines | Comma-separated directory prefixes to skip while scanning. |
+| `VAULT_REFAUDIT_EXCLUDE` | `ref-audit` | Comma-separated dirs the audit never walks (default: system/tool dirs only -- attachment dirs ARE walked, to flag orphan media). |
 | `VAULT_NORENAME_ZONES` | `name-reconcile` | Comma-separated folders to protect from rename (still scanned as link sources). |
 | `VAULT_FORBIDDEN_ZONES` | the mutating engines | Optional. Comma-separated reldir prefixes the mutators skip writing entirely. Unset (default) = no skipping; the operator watching the run plus the git diff is the control. |
 | `FRONTMATTER_SCHEMA` | the frontmatter engines | Path to your schema-as-code file. |

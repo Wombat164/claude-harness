@@ -19,6 +19,7 @@ ENGINES = {
     "frontmatter-fix":    "vault-frontmatter-fix.py",
     "set-note-type":      "vault-set-note-type.py",
     "taxonomy-inventory": "vault-taxonomy-inventory.py",
+    "ref-audit":          "vault-ref-audit.py",
     "memory-consolidate": "memory-consolidate.py",
     "registry-generate":  "registry-generate.py",
 }

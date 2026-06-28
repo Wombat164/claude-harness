@@ -101,6 +101,56 @@ off-vocabulary values.
 
 ---
 
+## Audit vault references
+
+**Goal:** find broken links, orphans, dead-ends, broken `.canvas`/`.base` references, and orphan media.
+Read-only -- nothing is changed.
+
+1. Point it at your vault and run it:
+   ```bash
+   export VAULT_ROOT="/path/to/your/notes"
+   claude-harness ref-audit            # human report
+   claude-harness ref-audit --json     # machine-readable
+   ```
+2. Read the report. **Unresolved wikilinks are informational** -- in Obsidian a `[[link]]` to a
+   not-yet-created note is a legitimate forward-reference. Broken `.canvas`/`.base` refs (a board or base
+   pointing at a deleted file) are always real defects, as is orphan media (an attachment nothing links).
+3. Gate it in CI or a pre-commit hook:
+   ```bash
+   claude-harness ref-audit --check            # exit 1 only on broken canvas/base refs
+   claude-harness ref-audit --check --strict   # also fail on unresolved links (for strict vaults)
+   ```
+
+---
+
+## Offload cheap work to a self-hosted model (two lanes)
+
+**Goal:** keep hard agentic work on your normal Claude lane, but route mechanical, high-volume turns
+(commit messages, summaries, extraction, classification, formatting) to a self-hosted open model so they
+cost ~nothing -- without changing your default `claude`.
+
+1. Stand up an endpoint that speaks the Anthropic `/v1/messages` API (vLLM-native, or a LiteLLM /
+   claude-code-router gateway in front of an OpenAI-only model). Serving recipes are in the in-repo
+   `docs/two-lane-model-handoff.md`.
+2. Configure the cheap lane (copy the example; never commit a real internal endpoint):
+   ```bash
+   cp config.example/cheap-lane.env.example ~/.config/claude-harness/cheap-lane.env   # then edit
+   # CLAUDE_CHEAP_BASE_URL=http://your-host:8000  |  CLAUDE_CHEAP_MODEL=...  |  CLAUDE_CHEAP_TOKEN=local
+   ```
+3. Run cheap work through the wrapper -- it sets `ANTHROPIC_BASE_URL` to your endpoint **for that
+   invocation only**:
+   ```bash
+   claude-cheap -p "write a conventional-commit message for the staged diff"
+   ```
+
+> [!warning] Two warnings that matter
+> **Billing:** pointing at a *paid* Anthropic-compatible gateway with a credential moves you off your
+> subscription onto per-token billing -- the point here is that traffic goes to *your* box (~zero marginal
+> cost). **Data egress:** everything in this lane goes to your endpoint -- keep it on a host you control
+> for sensitive content; never send regulated data or private model weights to a cloud you don't control.
+
+---
+
 ## Add a new engine
 
 **Goal:** add a new portable capability that the registry will pick up automatically.
