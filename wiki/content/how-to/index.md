@@ -156,7 +156,7 @@ existing markdown ecosystem instead of duplicating it.
    ```yaml
    repos:
      - repo: https://github.com/Wombat164/claude-harness
-       rev: v0.1.6
+       rev: v0.2.0
        hooks: [{ id: claude-harness-doctor }]   # or: claude-harness-ref-audit
    ```
    pre-commit installs the package in an isolated venv and runs the CLI against the repo root.
@@ -166,7 +166,7 @@ existing markdown ecosystem instead of duplicating it.
    - uses: actions/checkout@v4
    - uses: DavidAnson/markdownlint-cli2-action@v16    # markdown style (not claude-harness's job)
    - uses: lycheeverse/lychee-action@v2               # external link existence (not claude-harness's job)
-   - uses: Wombat164/claude-harness@v0.1.6            # broken wikilinks/.canvas/.base, orphans, health
+   - uses: Wombat164/claude-harness@v0.2.0            # broken wikilinks/.canvas/.base, orphans, health
      with: { vault-path: ".", engine: "doctor", strict: "false" }
    ```
 3. Understand what fails it. The exit code follows the doctor contract: broken `.canvas`/`.base` refs or an

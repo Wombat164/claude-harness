@@ -2,7 +2,7 @@
 #
 #   repos:
 #     - repo: https://github.com/Wombat164/claude-harness
-#       rev: v0.1.6
+#       rev: v0.2.0
 #       hooks:
 #         - id: claude-harness-doctor          # aggregate health gate (recommended)
 #         # - id: claude-harness-ref-audit     # or just reference integrity

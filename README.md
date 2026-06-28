@@ -1,11 +1,16 @@
 # claude-harness
 
+[![CI](https://github.com/Wombat164/claude-harness/actions/workflows/test.yml/badge.svg)](https://github.com/Wombat164/claude-harness/actions/workflows/test.yml)
+[![release](https://img.shields.io/github/v/release/Wombat164/claude-harness)](https://github.com/Wombat164/claude-harness/releases)
+[![license](https://img.shields.io/github/license/Wombat164/claude-harness)](LICENSE)
+[![docs](https://img.shields.io/badge/docs-wombat164.github.io-blue)](https://wombat164.github.io/claude-harness/)
+
 A **portable-core** harness for agentic coding/knowledge work. The load-bearing logic lives in
 harness-agnostic **engines** (deterministic scripts) + **prompt templates** + **versioned contracts**;
 a thin **adapter** binds them to a specific runtime. The Claude Code plugin is *one* adapter — the same
 core works from an MCP server, a plain CLI, or any other LLM harness.
 
-> Status: **0.1.6 (alpha).** Licensed **MIT** (see [`LICENSE`](LICENSE)).
+> Status: **0.2.0 (alpha).** Licensed **MIT** (see [`LICENSE`](LICENSE)).
 
 ## Why
 "Skills" (and plugins, hooks) are runtime-specific and not portable. Putting the real logic in **engines
@@ -86,12 +91,12 @@ The same engines run as a commit/CI gate. claude-harness ships a `.pre-commit-ho
 # .pre-commit-config.yaml (in your vault repo)
 repos:
   - repo: https://github.com/Wombat164/claude-harness
-    rev: v0.1.6
+    rev: v0.2.0
     hooks: [{ id: claude-harness-doctor }]
 ```
 ```yaml
 # a GitHub workflow step
-- uses: Wombat164/claude-harness@v0.1.6
+- uses: Wombat164/claude-harness@v0.2.0
   with: { vault-path: ".", engine: "doctor", strict: "false" }
 ```
 Exit semantics follow [ADR-0002](docs/adr-0002-doctor-exit-semantics.md) (fails on broken `.canvas`/`.base`

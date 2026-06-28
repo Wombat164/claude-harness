@@ -27,7 +27,7 @@ In your vault repo's `.pre-commit-config.yaml`:
 ```yaml
 repos:
   - repo: https://github.com/Wombat164/claude-harness
-    rev: v0.1.6
+    rev: v0.2.0
     hooks:
       - id: claude-harness-doctor        # aggregate health gate (recommended)
       # - id: claude-harness-ref-audit   # or just reference integrity
@@ -49,7 +49,7 @@ jobs:
       - uses: DavidAnson/markdownlint-cli2-action@v16
       - uses: lycheeverse/lychee-action@v2
       # the vault-graph-aware gate claude-harness uniquely provides:
-      - uses: Wombat164/claude-harness@v0.1.6
+      - uses: Wombat164/claude-harness@v0.2.0
         with:
           vault-path: "."
           engine: "doctor"          # or "ref-audit"
