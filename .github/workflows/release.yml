@@ -12,6 +12,10 @@ permissions:
 jobs:
   pypi:
     name: build + publish to PyPI
+    # GATED: runs only once a PyPI Trusted Publisher is configured for this repo AND the repo variable
+    # PYPI_ENABLE=true is set (Settings > Secrets and variables > Actions > Variables). Until then it is
+    # SKIPPED, so cutting a GitHub Release stays green. See RELEASING.md.
+    if: ${{ vars.PYPI_ENABLE == 'true' }}
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
