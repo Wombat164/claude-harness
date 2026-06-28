@@ -21,6 +21,13 @@ This publishes the GitHub Release. CI (`ci`) runs on the tag; the wiki redeploys
 
 ## Publish to PyPI (one-time setup, then automatic)
 
+> [!warning] The bare name `claude-harness` is TAKEN on PyPI
+> An unrelated project already owns `pypi.org/project/claude-harness`. Publishing as-is will fail. Before
+> enabling PyPI, rename the distribution in `pyproject.toml` (`[project] name`) to a free name (e.g.
+> `obsidian-claude-harness`) -- the import package, the `claude-harness` console command, the GitHub repo,
+> and the Claude Code plugin name can all stay the same; only the PyPI *distribution* name must change.
+> Until then, distribute via the plugin marketplace + `pipx install git+https://github.com/Wombat164/claude-harness`.
+
 PyPI publishing uses **Trusted Publishing (OIDC)** -- no API tokens are stored. It is **gated off by
 default** so releases stay green until you opt in. To enable:
 

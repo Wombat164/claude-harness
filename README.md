@@ -10,7 +10,7 @@ harness-agnostic **engines** (deterministic scripts) + **prompt templates** + **
 a thin **adapter** binds them to a specific runtime. The Claude Code plugin is *one* adapter — the same
 core works from an MCP server, a plain CLI, or any other LLM harness.
 
-> Status: **0.2.1 (alpha).** Licensed **MIT** (see [`LICENSE`](LICENSE)).
+> Status: **0.2.2 (alpha).** Licensed **MIT** (see [`LICENSE`](LICENSE)).
 
 ## Why
 "Skills" (and plugins, hooks) are runtime-specific and not portable. Putting the real logic in **engines
@@ -49,9 +49,11 @@ Each engine carries a metadata header (`@capability/@compute/@effect/@portabilit
 
 **As a standalone CLI** (the engines, runnable anywhere / in CI -- no Claude Code needed):
 ```
-pipx install claude-harness        # or:  uv tool install claude-harness        (once on PyPI)
-pip install -e ".[dev]"            # from a checkout (editable, with test/lint deps)
+pipx install git+https://github.com/Wombat164/claude-harness   # from GitHub
+pip install -e ".[dev]"                                         # from a checkout (editable, with test/lint deps)
 ```
+(The bare PyPI name `claude-harness` is taken by an unrelated project, so install from GitHub; a future
+PyPI release would use a distinct distribution name.)
 Then run any engine via the dispatcher:
 ```
 claude-harness <engine> [args]     # e.g.  claude-harness taxonomy-inventory --json
