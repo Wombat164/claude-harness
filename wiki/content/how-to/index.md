@@ -171,8 +171,11 @@ cost ~nothing -- without changing your default `claude`.
    claude-harness registry-generate            # preview
    claude-harness registry-generate --write     # write the registry doc
    ```
-6. **Add a test/fixture.** An engine without a test is experimental until it has one.
-7. **Add the adapter you use now** (e.g. a Claude Code skill that defers all logic to the engine). Add
+6. **Document it in the docs site.** Any user-facing capability must land in the wiki, not just the
+   README -- add a [Reference](../reference/) catalog entry and a How-to recipe. Docs that lag the tool
+   are worse than no docs.
+7. **Add a test/fixture.** An engine without a test is experimental until it has one.
+8. **Add the adapter you use now** (e.g. a Claude Code skill that defers all logic to the engine). Add
    an MCP binding only if a graduation trigger fires -- see [[explanation/index|the MCP ladder]].
 
 ---
